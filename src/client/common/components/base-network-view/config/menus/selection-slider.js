@@ -1,14 +1,5 @@
 const React = require('react');
 const h = require('react-hyperscript');
-const saveAs = require('file-saver').saveAs;
-const _ = require('lodash');
-
-const AsyncButton = require('../../../async-button');
-
-const { ServerAPI } = require('../../../../../services/');
-
-const downloadTypesFull = require('../../../../config').downloadTypes;
-
 
 class SelectionSliderMenu extends React.Component {
   constructor(props) {
