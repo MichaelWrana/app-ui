@@ -56,8 +56,9 @@ class SelectionSliderMenu extends React.Component {
   //return a slider and a button
   render() {
     return h('div.container',{},[
-        h("input.selection-slider",{type:"range",min:"0",max:"4",value:this.state.value,onChange:(e) => this.setState({value:e.target.value})}),
-        h('button.functionButton',{onClick:() => this.buttonClickFunc()},"Click Me!")
+        h("h2.description",{},"This slider will hide or show nodes based on their degree in the graph, from 0-5 (L-R)"),
+        h("input.selection-slider",{type:"range",min:"0",max:"5",value:this.state.value,onChange:(e) => this.setState({value:e.target.value})}),
+        h('button.functionButton',{onClick:() => this.buttonClickFunc()},"Update Graph"),
     ]);
   }
 }
