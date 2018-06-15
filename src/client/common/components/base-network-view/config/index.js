@@ -1,6 +1,6 @@
 const h = require('react-hyperscript');
 
-const { NetworkInfoMenu, FileDownloadMenu } = require('./menus');
+const { NetworkInfoMenu, FileDownloadMenu, SelectionSliderMenu } = require('./menus');
 
 let expanded = true;
 const expandCollapseAll = (props) => {
@@ -75,6 +75,11 @@ const onlyShowSelected = (props) => {
   }
 };
 
+const selectionSlider = (props) => {
+  const cy = props.cy;
+  console.log("Slider Here");
+};
+
 //helper function to show children of an entity
 const showAllChildren = (node) => {
   if(node.children){
@@ -139,7 +144,14 @@ const toolbarButtons = [
     func:onlyShowSelected,
     description:'Only Show Selected Nodex',
 
-  }
+  },
+  {
+    id:'showSelectionSlider',
+    icon:'replay',
+    type:'activateMenu',
+    menuId:'selectionSliderMenu',
+    description:'Node View Slider',
+  },
 ];
 
 // todo turn this into a map
@@ -157,6 +169,10 @@ const menus = [
   {
     id: 'networkInfoMenu',
     func: props => h(NetworkInfoMenu, props),
+  },
+  {
+    id:'selectionSliderMenu',
+    func: props => h(SelectionSliderMenu, props),
   }
 ];
 
