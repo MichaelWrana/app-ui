@@ -13,6 +13,8 @@ class SelectionSliderMenu extends React.Component {
 
   buttonClickFunc() {
     const nodes = this.state.nodes;
+    let sliderVal = this.state.value;
+
     if(this.state.value === 0){
         for(let i in nodes){
             if(nodes[i].show)
@@ -20,13 +22,34 @@ class SelectionSliderMenu extends React.Component {
         }
     }
     for(let i in nodes){
-        if(nodes[i].show)
-            nodes[i].show();
-        else
-            continue;
-        if(nodes[i].degree() < this.state.value && nodes[i].parent().length < 1){
-            nodes[i].hide();
+        //Get data needed to make decision about whether to hide or show the node
+        let node = nodes[i];
+        let nodeType = null;
+        let parent = null;
+        let parentType = null;
+        if(node.parent){parent = node.parent();}
+        if(node.data){nodeType = node.data().class;}
+        if(parent && parent.length > 0 && parent.data){parentType = parent.data().class;}
+
+        //sometimes "nodes" are functions?? this fixes that
+        if(node.show){ node.show(); }
+        else{ continue; }
+
+
+        //pretend compartments are not nodes in the graph when deciding whether to hide or show a node
+        //pretend a complex is a single node, and anything inside counts as the complex
+        if(nodeType !== "compartment"){
+            if(parent.length > 0){
+                if(parentType === "compartment" && node.degree() <= sliderVal){
+                    node.hide();
+                }
+            }else{
+                if(node.degree() <= sliderVal){
+                    node.hide();
+                }
+            }
         }
+
     }
   }
   
