@@ -11,6 +11,7 @@ class SelectionSliderMenu extends React.Component {
     };
   }
 
+  //executed when the "Click Me!" button is pressed
   buttonClickFunc() {
     const nodes = this.state.nodes;
     let sliderVal = this.state.value;
@@ -37,7 +38,7 @@ class SelectionSliderMenu extends React.Component {
 
 
         //pretend compartments are not nodes in the graph when deciding whether to hide or show a node
-        //pretend a complex is a single node, and anything inside counts as the complex
+        //pretend a complex is a single node, and anything inside should not be hidden
         if(nodeType !== "compartment"){
             if(parent.length > 0){
                 if(parentType === "compartment" && node.degree() <= sliderVal){
@@ -52,7 +53,7 @@ class SelectionSliderMenu extends React.Component {
 
     }
   }
-  
+  //return a slider and a button
   render() {
     return h('div.container',{},[
         h("input.selection-slider",{type:"range",min:"0",max:"4",value:this.state.value,onChange:(e) => this.setState({value:e.target.value})}),
