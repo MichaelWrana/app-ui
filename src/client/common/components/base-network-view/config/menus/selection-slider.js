@@ -11,10 +11,15 @@ class SelectionSliderMenu extends React.Component {
     };
   }
 
+  sliderUpdate(e){
+      this.setState({value:e.target.value});
+  }
+
   //executed when the "Click Me!" button is pressed
   buttonClickFunc() {
     const nodes = this.state.nodes;
     let sliderVal = this.state.value;
+    console.log(sliderVal);
 
     if(this.state.value === 0){
         for(let i in nodes){
@@ -56,8 +61,8 @@ class SelectionSliderMenu extends React.Component {
   //return a slider and a button
   render() {
     return h('div.container',{},[
-        h("h2.description",{},"This slider will hide or show nodes based on their degree in the graph, from 0-5 (L-R)"),
-        h("input.selection-slider",{type:"range",min:"0",max:"5",value:this.state.value,onChange:(e) => this.setState({value:e.target.value})}),
+        h("h2.description",{},"This slider will hide or show nodes based on their degree in the graph, from 0-10 (L-R)"),
+        h("input.selection-slider",{type:"range",min:"0",max:"10",value:this.state.value,onChange:(e) => this.sliderUpdate(e)}),
         h('button.functionButton',{onClick:() => this.buttonClickFunc()},"Update Graph"),
     ]);
   }
